@@ -34,7 +34,7 @@ gulp.task('html', function() {
 });
 
 gulp.task('styles', function() {
-    return gulp.src(client + 'assets/css/main.css')
+    return gulp.src(client + 'assets/css/*.css')
         .pipe(gulp.dest(dist + 'css/'))
         .pipe(plugins.size({ title : 'css' }))
         .pipe(plugins.connect.reload());

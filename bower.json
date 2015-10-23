@@ -1,0 +1,19 @@
+{
+  "name": "react-me",
+  "version": "1.0.0",
+  "authors": [
+    "@wil_js <cpwilgenhoff@gmail.com>"
+  ],
+  "description": "React Example Application",
+  "main": "index.html",
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+  }
+}

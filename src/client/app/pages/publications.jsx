@@ -1,26 +1,27 @@
 import React from 'react';
+import PublicationStore from '../stores/publicationStore';
+import PublicationActions from '../actions/publicationActions';
 
 class Publications extends React.Component {
 
     constructor(props){
         super(props);
         this.state = {
-            publications : [],
-            loading: false
+            publications : []
         };
     }
 
     componentDidMount() {
-        //this.unsubscribe = ItemStore.listen(this.onStatusChange.bind(this));
-        //ItemActions.loadItems();
+        this.unsubscribe = PublicationStore.listen(this.onStatusChange.bind(this));
+        PublicationActions.loadPublications();
     }
 
     componentWillUnmount() {
-        //this.unsubscribe();
+        this.unsubscribe();
     }
 
     onStatusChange(state) {
-        //this.setState(state);
+        this.setState(state);
     }
 
     render() {
@@ -28,6 +29,7 @@ class Publications extends React.Component {
         return (
             <div>
                 <h2>Publications</h2>
+                <div>{this.state.publications}</div>
             </div>
         );
     }

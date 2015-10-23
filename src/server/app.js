@@ -1,20 +1,29 @@
 /*jshint node:true*/
 'use strict';
 
+var fs = require('fs');
 var express = require('express');
 var app = express();
 var bodyParser = require('body-parser');
 var compress = require('compression');
-var port = process.env.PORT || 7200;
-var routes;
 
+var port = process.env.PORT || 7200;
+var routesPath = __dirname + '/routes/';
 var environment = process.env.NODE_ENV;
 
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(bodyParser.json());
 app.use(compress());          // Compress response data with gzip
 
-routes = require('./routes/index')(app);
+fs.readdir(routesPath, function (err, routes) {
+    if (err) {
+        throw err;
+    }
+
+    routes.forEach( function (route) {
+        require(routesPath + route)(app);
+    });
+});
 
 console.log('Loading Node');
 console.log('PORT=' + port);

@@ -1,8 +1,8 @@
 module.exports = function(app) {
-    app.get('/api/test', getTest);
+    app.get('/api/ping', getTest);
 
     function getTest(req, res, next) {
-        var json = [{ test: 'test' }];
+        var json = [{ test: 'pong' }];
         res.send(json);
     }
 };

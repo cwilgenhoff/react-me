@@ -1,0 +1,37 @@
+body {
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-size: 14px;
+    line-height: 1.42857143;
+    color: #333;
+}
+
+.field-label {
+    font-weight: bold;
+    color: #686868;
+    font-size: larger;
+}
+
+.publications {
+    margin: 0 auto;
+}
+
+.publication {
+    display: flex;
+    flex-direction: row;
+    align-content: flex-start;
+    justify-content: space-between;
+    width: 100%;
+}
+
+.publication .details {
+
+}
+
+.publication .cover-image-container {
+    border: 2px solid #CCCCCC;
+}
+
+.publication .cover-image {
+    width: 300px;
+    height: 400px;
+}

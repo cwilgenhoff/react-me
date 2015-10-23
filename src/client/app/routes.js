@@ -7,7 +7,7 @@ import NotFound from './pages/notFound.jsx';
 
 var routes = (
     <Route name="app" path="/" handler={ App }>
-        <Route name="home" handler={ Publications } />
+        <Route name="publications" handler={ Publications } />
         <DefaultRoute handler={ Publications } />
         <NotFoundRoute handler={ NotFound } />
     </Route>

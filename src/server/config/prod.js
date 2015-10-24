@@ -25,8 +25,8 @@ function config() {
     };
 
     config.cors = {
-        origin: true,
-        allowedHeaders: ['Accept', 'Authorization', 'Content-Type', 'Origin', 'Referer', 'Cache-Control', 'X-Requested-With'],
+        origin: '*',
+        allowedHeaders: ['Accept', 'Authorization', 'Content-Type', 'Origin'],
         methods: ['GET', 'PUT', 'POST', 'HEAD', 'DELETE'],
         credentials: true
     };

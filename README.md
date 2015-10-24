@@ -24,3 +24,4 @@ Builds a minified version of the application in the public folder.
 
 ```
 $ gulp build --type production
+```

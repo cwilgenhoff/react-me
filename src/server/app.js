@@ -2,39 +2,61 @@
 'use strict';
 
 var fs = require('fs');
+var path = require('path');
 var express = require('express');
-var app = express();
 var bodyParser = require('body-parser');
 var compress = require('compression');
+var app = {};
 
-var port = process.env.PORT || 7200;
-var routesPath = __dirname + '/routes/';
-var environment = process.env.NODE_ENV;
+app.globals = {
+    utils: {},
+    config: {}
+};
 
-app.use(bodyParser.urlencoded({extended: true}));
-app.use(bodyParser.json());
-app.use(compress());          // Compress response data with gzip
+app.globals.utils.fs = fs;
+app.globals.utils.path = path;
+app.globals.config = require(app.globals.utils.path.join(__dirname, './config/main'))(app);
 
-fs.readdir(routesPath, function (err, routes) {
-    if (err) {
-        throw err;
-    }
+app.loadDataLayer = function(app) {
+    app.globals.dataLayer = require(app.globals.utils.path.join(__dirname, 'dataLayers', app.globals.config.dataLayer.use))(app);
+    app.globals.db = app.globals.dataLayer.getDatabase(function(error) {
+        if (error) {
+            console.log('DataLayer DB Failed to Load');
+            console.log(error);
+            return;
+        }
 
-    routes.forEach( function (route) {
-        require(routesPath + route)(app);
+        console.log('DataLayer DB Successfully Loaded');
     });
-});
+};
 
-console.log('Loading Node');
-console.log('PORT=' + port);
-console.log('NODE_ENV=' + environment);
+app.loadRoutes = function(app) {
+    var routesPath = app.globals.utils.path.join(__dirname, '/routes/');
+    fs.readdir(routesPath, function (err, routes) {
+        if (err) {
+            throw err;
+        }
 
-app.use('/', express.static('./public'));
-app.use('/', express.static('./'));
+        routes.forEach( function (route) {
+            require(routesPath + route)(app.globals.server);
+        });
+    });
+};
 
-app.listen(port, function() {
-    console.log('Express server listening on port ' + port);
-    console.log('env = ' + app.get('env') +
-        '\n__dirname = ' + __dirname +
-        '\nprocess.cwd = ' + process.cwd());
-});
+app.run = function() {
+    app.globals.server = express();
+    app.globals.server.use(bodyParser.urlencoded({extended: true}));
+    app.globals.server.use(bodyParser.json());
+    app.globals.server.use(compress());
+    app.globals.server.use('/', express.static('./public'));
+    app.globals.server.use('/', express.static('./'));
+
+    app.globals.server.listen(app.globals.config.appPort, function() {
+        console.log('Express server listening on port ' + app.globals.config.appPort);
+
+        app.loadDataLayer(app);
+        app.loadRoutes(app);
+    });
+};
+
+exports = module.exports = app;

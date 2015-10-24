@@ -6,7 +6,7 @@ class RestHelper {
         return new Promise(function(success, error){
             $.ajax({
                 url: url,
-                dataType: "json",
+                dataType: 'json',
                 success,
                 error
             });

@@ -9,18 +9,26 @@ function config() {
     config.dataLayer = {
         use: 'pouchdb',
         pouchdb: {
-            dbName: 'prod-react-me-db',
+            dbName: 'test-collection-prod',
             remote: {
+                dbName: 'test-collection',
                 protocol: 'http',
                 url: 'padify.cloudant.com',
                 username: 'asemeacherbsepteditheres',
-                password: '81f0885385265026485780696c1f95f9eb529833',
-                collection: 'test-collection'
+                password: '81f0885385265026485780696c1f95f9eb529833'
             },
             options: {
-                live: true
+                /* CORS is disabled in remote CouchDB */
+                /* live: true  */
             }
         }
+    };
+
+    config.cors = {
+        origin: true,
+        allowedHeaders: ['Accept', 'Authorization', 'Content-Type', 'Origin', 'Referer', 'Cache-Control', 'X-Requested-With'],
+        methods: ['GET', 'PUT', 'POST', 'HEAD', 'DELETE'],
+        credentials: true
     };
 
     return config;

@@ -1,5 +1,5 @@
 function index(app) {
-    app.get('/api/ping', getTest);
+    app.globals.server.get('/api/ping', getTest);
 
     function getTest(req, res, next) {
         var json = [{ test: 'pong' }];

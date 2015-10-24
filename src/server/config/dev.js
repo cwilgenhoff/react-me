@@ -9,18 +9,22 @@ function config() {
     config.dataLayer = {
         use: 'pouchdb',
         pouchdb: {
-            dbName: 'dev-react-me-db',
+            dbName: 'test-collection-dev',
             remote: {
+                dbName: 'test-collection',
                 protocol: 'http',
-                url: 'padify.cloudant.com',
-                username: 'asemeacherbsepteditheres',
-                password: '81f0885385265026485780696c1f95f9eb529833',
-                collection: 'test-collection'
+                url: 'localhost:5984',
+                username: '',
+                password: ''
             },
             options: {
                 live: true
             }
         }
+    };
+
+    config.cors = {
+        source: false
     };
 
     return config;

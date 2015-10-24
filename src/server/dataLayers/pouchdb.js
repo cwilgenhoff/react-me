@@ -1,4 +1,4 @@
-module.exports = function(app) {
+function pouchdb(app) {
     var PouchDB = require('pouchdb');
     var db;
 
@@ -17,18 +17,28 @@ module.exports = function(app) {
     }
 
     function syncDatabase(callback) {
-        //TODO: Handle errors
-        db.sync(
-            getConnectionString(app.globals.config.dataLayer.pouchdb.remote),
-            app.globals.config.dataLayer.pouchdb.options,
-            callback);
+        var remoteCouch = getConnectionString(app.globals.config.dataLayer.pouchdb.remote);
+        var options = app.globals.config.dataLayer.pouchdb.options;
+
+        db.sync(remoteCouch, options)
+            .on('complete', function (info) {
+                callback(null, info);
+            }).on('error', function (err) {
+                callback(err);
+            });
     }
 
     function getConnectionString(remoteConfig) {
+        var auth = '';
+        if (remoteConfig.username && remoteConfig.password) {
+            auth = remoteConfig.username + ':' + remoteConfig.password + '@';
+        }
+
         return remoteConfig.protocol + '://' +
-            remoteConfig.username + ':' +
-            remoteConfig.password + '@' +
+            auth +
             remoteConfig.url + '/' +
-            remoteConfig.collection;
+            remoteConfig.dbName;
     }
-};
+}
+
+exports = module.exports = pouchdb;

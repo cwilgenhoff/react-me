@@ -1,7 +1,7 @@
 /*jslint node: true */
 'use strict';
 
-module.exports = function() {
+function config() {
     var config = {};
 
     config.appPort = 7200;
@@ -24,4 +24,6 @@ module.exports = function() {
     };
 
     return config;
-};
+}
+
+exports = module.exports = config;

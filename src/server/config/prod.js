@@ -1,10 +1,10 @@
 /*jslint node: true */
 'use strict';
 
-module.exports = function() {
+function config() {
     var config = {};
 
-    config.appPort = process.env.PORT;
+    config.appPort = process.env.PORT || 7200;
 
     config.dataLayer = {
         use: 'pouchdb',
@@ -24,4 +24,6 @@ module.exports = function() {
     };
 
     return config;
-};
+}
+
+exports = module.exports = config;

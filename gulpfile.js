@@ -41,7 +41,7 @@ gulp.task('styles', function() {
 });
 
 gulp.task('live-server', function() {
-    var liveServer = new plugins.liveServer(server + 'app.js');
+    var liveServer = new plugins.liveServer(server + 'index.js');
     liveServer.start();
 });
 

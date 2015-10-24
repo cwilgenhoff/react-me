@@ -1,4 +1,4 @@
-module.exports = function(app) {
+function publications(app) {
     app.get('/api/publications/', getPublications);
 
     function getPublications(req, res, next) {
@@ -89,4 +89,6 @@ module.exports = function(app) {
 
         res.send(json);
     }
-};
+}
+
+exports = module.exports = publications;

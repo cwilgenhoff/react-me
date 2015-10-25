@@ -57,34 +57,36 @@ Develop a simple interface using the following stack, with automation in mind, t
 
 ## Folder Structure
 
+React-me follows a very simple folder structure.
+
 ```
 .
-├── public                                          # Output folder for Bundle.
-├── src                                             # Source code of the entire application.
-│   ├── client                                      # Front End Application.
-│   │   ├── app                                     # Backend End Application.
-│   │   │   ├── actions                             # Reflux Actions.
-│   │   │   ├── components                          # React Components.
-│   │   │   ├── helpers                             # Utilities.
-│   │   │   ├── pages                               # React Components (pages).
-│   │   │   ├── stores                              # Reflux Stores.
-│   │   │   ├── app.js                              # React App Runner.
-│   │   │   └── routes.js                           # React Router Setup.
-│   │   ├── assets                                  # Static Assets (css, images).
-│   │   ├── tests                                   # Front End Test Suite .
-│   │   └── index.html                              # Entry point for React App.
-│   └── server                                      # Backend End Application.
-│       ├── config                                  # Backend End Environment Configuration.
-│       ├── dataLayers                              # Data Layers for Connection to DBs.
-│       ├── models                                  # Data Models for Abstracting Data Layers.
-│       ├── routes                                  # Exposed REST API Endpoints.
-│       ├── tests                                   # Backend End Test Suite.
-│       ├── app.js                                  # Backend End Environment Configuration.
-│       └── index.js                                # Backend End Entry Point.
-├── gulpfile.js                                     # Gulp File for Task Automation.
-├── package.json                                    # List of 3rd Party Libraries and Utilities.
-├── README.md                                       # This file.
-└── webpack.config.js                               # Webpack Configuration.
+├── public                            # Output folder for Bundle.
+├── src                               # Source code of the entire application.
+│   ├── client                        # Front End Application.
+│   │   ├── app                       # Backend End Application.
+│   │   │   ├── actions               # Reflux Actions.
+│   │   │   ├── components            # React Components.
+│   │   │   ├── helpers               # Utilities.
+│   │   │   ├── pages                 # React Components (pages).
+│   │   │   ├── stores                # Reflux Stores.
+│   │   │   ├── app.js                # React App Runner.
+│   │   │   └── routes.js             # React Router Setup.
+│   │   ├── assets                    # Static Assets (css, images).
+│   │   ├── tests                     # Front End Test Suite .
+│   │   └── index.html                # Entry point for React App.
+│   └── server                        # Backend End Application.
+│       ├── config                    # Backend End Environment Configuration.
+│       ├── dataLayers                # Data Layers for Connection to DBs.
+│       ├── models                    # Data Models for Abstracting Data Layers.
+│       ├── routes                    # Exposed REST API Endpoints.
+│       ├── tests                     # Backend End Test Suite.
+│       ├── app.js                    # Backend End Environment Configuration.
+│       └── index.js                  # Backend End Entry Point.
+├── gulpfile.js                       # Gulp File for Task Automation.
+├── package.json                      # List of 3rd Party Libraries and Utilities.
+├── README.md                         # This file.
+└── webpack.config.js                 # Webpack Configuration.
 
 ```
 
@@ -93,26 +95,26 @@ Develop a simple interface using the following stack, with automation in mind, t
 React-me server can run in any desired port and can connect to any CouchDB database. For that, it provides a configuration file placed inside `src/server/config/<env>.js`
 
 ```
-    config.appPort = 7200;                          # Set PORT for Express to use.
+    config.appPort = 7200;                  # Set PORT for Express to use.
 
-    config.dataLayer = {                            # Create custom Data Layers and Configurations.
-        use: 'pouchdb',                             # Set Default Data Layer to use.
+    config.dataLayer = {                    # Create custom Data Layers and Configurations.
+        use: 'pouchdb',                     # Set Default Data Layer to use.
         pouchdb: {
-            dbName: 'test-collection-dev',          # Set Name of the Local DB Replicate.
+            dbName: 'test-collection-dev',  # Set Name of the Local DB Replicate.
             remote: {
-                dbName: 'test-collection',          # Set Name of the Remote DB.
-                protocol: 'http',                   # Set Protocol of the Remote DB Connection.
-                url: 'localhost:5984',              # Set URL of the Remote DB Connection.
-                username: '',                       # Set username of the Remote DB Connection.
-                password: ''                        # Set username of the Remote DB Connection.
+                dbName: 'test-collection',  # Set Name of the Remote DB.
+                protocol: 'http',           # Set Protocol of the Remote DB Connection.
+                url: 'localhost:5984',      # Set URL of the Remote DB Connection.
+                username: '',               # Set username of the Remote DB Connection.
+                password: ''                # Set username of the Remote DB Connection.
             },
             options: {
-                live: true                          # Place PouchDB replication options.
+                live: true                  # Place PouchDB replication options.
             }
         }
     };
 
-    config.cors = {                                 # Place Express CORS Configuration.
+    config.cors = {                         # Place Express CORS Configuration.
 
     };
 ```

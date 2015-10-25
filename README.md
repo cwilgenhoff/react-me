@@ -95,26 +95,26 @@ React-me follows a very simple folder structure.
 React-me server can run in any desired port and can connect to any CouchDB database, in fact to any DB (as long as the specific data-layer is implemented). For that, it provides a configuration file placed inside `src/server/config/<env>.js`
 
 ```javascript
-    config.appPort = 7200;                  # Set PORT for Express to use.
+    config.appPort = 7200;                  // Set PORT for Express to use.
 
-    config.dataLayer = {                    # Create custom Data Layers and Configurations.
-        use: 'pouchdb',                     # Set Default Data Layer to use.
+    config.dataLayer = {                    // Create custom Data Layers and Configurations.
+        use: 'pouchdb',                     // Set Default Data Layer to use.
         pouchdb: {
-            dbName: 'test-collection-dev',  # Set Name of the Local DB Replicate.
+            dbName: 'test-collection-dev',  // Set Name of the Local DB Replicate.
             remote: {
-                dbName: 'test-collection',  # Set Name of the Remote DB.
-                protocol: 'http',           # Set Protocol of the Remote DB Connection.
-                url: 'localhost:5984',      # Set URL of the Remote DB Connection.
-                username: '',               # Set username of the Remote DB Connection.
-                password: ''                # Set username of the Remote DB Connection.
+                dbName: 'test-collection',  // Set Name of the Remote DB.
+                protocol: 'http',           // Set Protocol of the Remote DB Connection.
+                url: 'localhost:5984',      // Set URL of the Remote DB Connection.
+                username: '',               // Set username of the Remote DB Connection.
+                password: ''                // Set username of the Remote DB Connection.
             },
             options: {
-                live: true                  # Place PouchDB replication options.
+                live: true                  // Place PouchDB replication options.
             }
         }
     };
 
-    config.cors = {                         # Place Express CORS Configuration.
+    config.cors = {                         // Place Express CORS Configuration.
 
     };
 ```

@@ -94,7 +94,7 @@ React-me follows a very simple folder structure.
 
 React-me server can run in any desired port and can connect to any CouchDB database, in fact to any DB (as long as the specific data-layer is implemented). For that, it provides a configuration file placed inside `src/server/config/<env>.js`
 
-```
+```javascript
     config.appPort = 7200;                  # Set PORT for Express to use.
 
     config.dataLayer = {                    # Create custom Data Layers and Configurations.
@@ -119,7 +119,7 @@ React-me server can run in any desired port and can connect to any CouchDB datab
     };
 ```
 
-* **Important**: <env> matches to what was set for NODE_ENV global variable.
+* **Important**: `<env>` matches to what was set for NODE_ENV global variable.
 
 ## Design Guidelines
 

@@ -6,7 +6,7 @@
   "scripts": {
     "postinstall": "gulp build",
     "start": "node src/server/index.js",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "gulp test"
   },
   "repository": {
     "type": "git",
@@ -14,11 +14,11 @@
   },
   "keywords": [
     "react",
-    "rxjs",
     "node",
     "express",
     "pouchdb",
-    "couchdb"
+    "couchdb",
+    "webpack"
   ],
   "author": "@wil_js <cpwilgenhoff@gmail.com>",
   "license": "MIT",
@@ -27,11 +27,17 @@
   },
   "homepage": "https://github.com/cwilgenhoff/react-me#readme",
   "devDependencies": {
+    "babel": "^5.8.29",
     "browser-sync": "^2.9.11",
+    "chai": "^3.4.0",
     "gulp-live-server": "0.0.29",
+    "gulp-mocha": "^2.1.3",
     "gulp-watch": "^4.3.5",
+    "jsdom": "^7.0.2",
+    "mocha": "^2.3.3",
     "object-assign": "^2.0.0",
-    "react-tools": "^0.13.1"
+    "react-tools": "^0.13.1",
+    "sinon": "^1.17.2"
   },
   "dependencies": {
     "del": "^2.0.2",

@@ -58,6 +58,15 @@ gulp.task('watch', function() {
     gulp.watch(client + 'app/**/*.jsx', ['scripts']);
 });
 
+gulp.task('test-client', function() {
+    require('babel/register');
+    return gulp.src(client + 'tests/**/*.spec.jsx', {read: false})
+        .pipe(plugins.mocha({
+            reporter: 'spec',
+            require: [client + 'tests/utils/dom.js']
+        }));
+});
+
 gulp.task('clean', function(cb) {
     del([dist], cb);
 });
@@ -65,3 +74,5 @@ gulp.task('clean', function(cb) {
 gulp.task('default', ['live-server', 'build', 'serve', 'watch']);
 
 gulp.task('build', ['clean', 'html', 'scripts', 'styles']);
+
+gulp.task('test', ['test-client']);

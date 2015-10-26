@@ -2,12 +2,22 @@
 
 This react app is a proof of concept of several technologies.
 
+[DEMO](https://sheltered-forest-1877.herokuapp.com)
+
 ## Installation
 
 Install all dependencies.
 
 ```
 $ npm install
+```
+
+## Run
+
+Starts the application.
+
+```
+$ npm start
 ```
 
 ## Development
@@ -34,26 +44,36 @@ Runs a suite of unit tests.
 $ npm test
 ```
 
-## Requirements
+## Environment Configuration
 
-React-me solves one requirement and it's as follows:
+React-me server can run in any desired port and can connect to any CouchDB database, in fact to any DB (as long as the specific data-layer is implemented). For that, it provides a configuration file placed inside `src/server/config/<env>.js`
 
-> "As a user, I want to see a list detailing magazines and/or books publications so I can later decide which one to buy."
+```javascript
+    config.appPort = 7200;                  // Set PORT for Express to use.
 
-### Details
+    config.dataLayer = {                    // Create custom Data Layers and Configurations.
+        use: 'pouchdb',                     // Set Default Data Layer to use.
+        pouchdb: {
+            dbName: 'test-collection-dev',  // Set Name of the Local DB Replicate.
+            remote: {
+                dbName: 'test-collection',  // Set Name of the Remote DB.
+                protocol: 'http',           // Set Protocol of the Remote DB Connection.
+                url: 'localhost:5984',      // Set URL of the Remote DB Connection.
+                username: '',               // Set username of the Remote DB Connection.
+                password: ''                // Set username of the Remote DB Connection.
+            },
+            options: {
+                live: true                  // Place PouchDB replication options.
+            }
+        }
+    };
 
-The list of publications will show the publication name, a summary and a cover image.
+    config.cors = {                         // Place Express CORS Configuration.
 
-## Technical Requirements
+    };
+```
 
-Develop a simple interface using the following stack, with automation in mind, that connects to a CouchDB database.
-
-* [React](https://facebook.github.io/react/)
-* [Reflux](https://github.com/reflux/refluxjs)
-* [NodeJS](https://nodejs.org/en/)
-* [Express 4](http://expressjs.com/)
-* [PouchDB](http://pouchdb.com/)
-* [WebPack](https://webpack.github.io/)
+* **Important**: `<env>` matches to what was set for NODE_ENV global variable. Available environments are ['development', 'production'].
 
 ## Folder Structure
 
@@ -90,36 +110,26 @@ React-me follows a very simple folder structure.
 
 ```
 
-## Environment Configuration
+## Requirements
 
-React-me server can run in any desired port and can connect to any CouchDB database, in fact to any DB (as long as the specific data-layer is implemented). For that, it provides a configuration file placed inside `src/server/config/<env>.js`
+React-me solves one requirement and it's as follows:
 
-```javascript
-    config.appPort = 7200;                  // Set PORT for Express to use.
+> "As a user, I want to see a list detailing magazines and/or books publications so I can later decide which one to buy."
 
-    config.dataLayer = {                    // Create custom Data Layers and Configurations.
-        use: 'pouchdb',                     // Set Default Data Layer to use.
-        pouchdb: {
-            dbName: 'test-collection-dev',  // Set Name of the Local DB Replicate.
-            remote: {
-                dbName: 'test-collection',  // Set Name of the Remote DB.
-                protocol: 'http',           // Set Protocol of the Remote DB Connection.
-                url: 'localhost:5984',      // Set URL of the Remote DB Connection.
-                username: '',               // Set username of the Remote DB Connection.
-                password: ''                // Set username of the Remote DB Connection.
-            },
-            options: {
-                live: true                  // Place PouchDB replication options.
-            }
-        }
-    };
+### Details
 
-    config.cors = {                         // Place Express CORS Configuration.
+The list of publications will show the publication name, a summary and a cover image.
 
-    };
-```
+## Technical Requirements
 
-* **Important**: `<env>` matches to what was set for NODE_ENV global variable.
+Develop a simple interface using the following stack, with automation in mind, that connects to a CouchDB database.
+
+* [React v0.13](https://facebook.github.io/react/)
+* [Reflux v0.2.7](https://github.com/reflux/refluxjs)
+* [NodeJS v4.2.1](https://nodejs.org/en/)
+* [Express v4.13](http://expressjs.com/)
+* [PouchDB v5.0](http://pouchdb.com/)
+* [WebPack v1.12.2](https://webpack.github.io/)
 
 ## Design Guidelines
 

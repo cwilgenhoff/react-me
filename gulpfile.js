@@ -1,5 +1,4 @@
 var gulp = require('gulp');
-var browserSync = require('browser-sync');
 var plugins = require('gulp-load-plugins')();
 var del = require('del');
 
@@ -22,22 +21,19 @@ gulp.task('scripts', function() {
         .pipe(plugins.webpack(webpackConfig))
         .pipe(isProduction ? plugins.uglifyjs() : plugins.util.noop())
         .pipe(gulp.dest(dist + 'js/'))
-        .pipe(plugins.size({ title : 'js' }))
-        .pipe(plugins.connect.reload());
+        .pipe(plugins.size({ title : 'js' }));
 });
 
 gulp.task('html', function() {
     return gulp.src(client + 'index.html')
         .pipe(gulp.dest(dist))
-        .pipe(plugins.size({ title : 'html' }))
-        .pipe(plugins.connect.reload());
+        .pipe(plugins.size({ title : 'html' }));
 });
 
 gulp.task('styles', function() {
     return gulp.src(client + 'assets/css/*.css')
         .pipe(gulp.dest(dist + 'css/'))
-        .pipe(plugins.size({ title : 'css' }))
-        .pipe(plugins.connect.reload());
+        .pipe(plugins.size({ title : 'css' }));
 });
 
 gulp.task('live-server', function() {
@@ -46,6 +42,8 @@ gulp.task('live-server', function() {
 });
 
 gulp.task('serve', function() {
+    var browserSync = require('browser-sync');
+
     browserSync.init(null, {
         proxy: "http://localhost:" + eport,
         browser: "google-chrome",

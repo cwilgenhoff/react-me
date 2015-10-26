@@ -4,7 +4,8 @@
   "description": "React Example Application",
   "main": "src/server/index.js",
   "scripts": {
-    "start": "gulp",
+    "postinstall": "gulp build",
+    "start": "node src/server/index.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
@@ -26,24 +27,23 @@
   },
   "homepage": "https://github.com/cwilgenhoff/react-me#readme",
   "devDependencies": {
-    "babel-core": "^5.8.25",
-    "babel-loader": "^5.3.2",
     "browser-sync": "^2.9.11",
+    "gulp-live-server": "0.0.29",
+    "gulp-watch": "^4.3.5",
+    "object-assign": "^2.0.0",
+    "react-tools": "^0.13.1"
+  },
+  "dependencies": {
     "del": "^2.0.2",
     "gulp": "^3.9.0",
-    "gulp-connect": "^2.2.0",
-    "gulp-live-server": "0.0.29",
+    "babel-core": "^5.8.25",
+    "babel-loader": "^5.3.2",
     "gulp-load-plugins": "^1.0.0",
     "gulp-size": "^2.0.0",
     "gulp-uglifyjs": "^0.6.2",
     "gulp-util": "^3.0.7",
-    "gulp-watch": "^4.3.5",
     "gulp-webpack": "^1.5.0",
-    "object-assign": "^2.0.0",
-    "react-tools": "^0.13.1",
-    "webpack": "^1.12.2"
-  },
-  "dependencies": {
+    "webpack": "^1.12.2",
     "body-parser": "^1.14.1",
     "compression": "^1.6.0",
     "cors": "^2.7.1",

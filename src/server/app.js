@@ -32,17 +32,57 @@ app.loadDataLayer = function(app) {
     });
 };
 
-app.loadRoutes = function(app) {
-    var routesPath = app.globals.utils.path.join(__dirname, 'routes/');
-    fs.readdir(routesPath, function (err, routes) {
-        if (err) {
-            throw err;
+app.loadControllers = function(app) {
+    var controllersPath = app.globals.utils.path.join(__dirname, 'controllers/');
+    fs.readdir(controllersPath, function (error, controllers) {
+        if (error) {
+            throw error;
         }
 
-        routes.forEach( function (route) {
-            require(routesPath + route)(app);
+        controllers.forEach(function (controller) {
+            require(controllersPath + controller)(app);
         });
     });
+};
+
+app.loadModels = function(app, callback) {
+    app.globals.models = app.globals.models || {};
+
+    var modelsPath = app.globals.utils.path.join(__dirname, 'models/');
+    fs.readdir(modelsPath, function (error, models) {
+        if (error) {
+            callback(error);
+        }
+
+        models.forEach( function (fileName) {
+            var model = require(modelsPath + fileName)(app);
+            app.globals.models[model.name] = model;
+        });
+
+        callback(null);
+    });
+};
+
+app.registerEndpoint = function(verb, url, callback) {
+    if (!app.globals.server || !app.globals.server[verb]) {
+        console.log('No verb + ' + verb + 'available.');
+        return;
+    }
+
+    if (!url) {
+        console.log('No url provided.');
+        return;
+    }
+
+    var argumentsOptions = [url];
+
+    if (callback && (callback instanceof Array)) {
+        argumentsOptions = argumentsOptions.concat(callback);
+    } else if (callback) {
+        argumentsOptions.push(callback);
+    }
+
+    app.globals.server[verb].apply(app.globals.server, argumentsOptions);
 };
 
 app.run = function() {
@@ -56,8 +96,14 @@ app.run = function() {
     app.globals.server.listen(app.globals.config.appPort, function() {
         console.log('Express server listening on port ' + app.globals.config.appPort);
 
-        app.loadRoutes(app);
-        app.loadDataLayer(app);
+        app.loadModels(app, function (error) {
+            if (error) {
+                throw error;
+            }
+
+            app.loadControllers(app);
+            app.loadDataLayer(app);
+        });
     });
 };
 

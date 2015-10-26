@@ -1,3 +1,6 @@
+/*jslint node: true */
+'use strict';
+
 function pouchdb(app) {
     var PouchDB = require('pouchdb');
     var db;

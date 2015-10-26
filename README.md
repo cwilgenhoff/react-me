@@ -99,7 +99,7 @@ React-me follows a very simple folder structure.
 │       ├── config                    # Backend End Environment Configuration.
 │       ├── dataLayers                # Data Layers for Connections to DBs.
 │       ├── models                    # Data Models for Abstracting Data Layers.
-│       ├── routes                    # Exposed REST API Endpoints.
+│       ├── controllers               # Controllers with their exposed REST API's.
 │       ├── tests                     # Backend End Test Suite.
 │       ├── app.js                    # Backend End Global Application.
 │       └── index.js                  # Backend End Entry Point.

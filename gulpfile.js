@@ -16,7 +16,7 @@ var client = './src/client/';
 var server = './src/server/';
 var dist = 'public/';
 
-gulp.task('scripts', function() {
+gulp.task('scripts', ['html', 'styles'], function() {
     return gulp.src(webpackConfig.entry)
         .pipe(plugins.webpack(webpackConfig))
         .pipe(isProduction ? plugins.uglifyjs() : plugins.util.noop())
@@ -41,7 +41,7 @@ gulp.task('live-server', function() {
     liveServer.start();
 });
 
-gulp.task('serve', function() {
+gulp.task('serve', ['live-server'], function() {
     var browserSync = require('browser-sync');
 
     browserSync.init(null, {
@@ -58,7 +58,7 @@ gulp.task('watch', function() {
     gulp.watch(client + 'app/**/*.jsx', ['scripts']);
 });
 
-gulp.task('test-client', function() {
+gulp.task('test-client', ['test-server'], function() {
     require('babel/register');
     return gulp.src(client + 'tests/**/*.spec.jsx', {read: false})
         .pipe(plugins.mocha({
@@ -67,12 +67,19 @@ gulp.task('test-client', function() {
         }));
 });
 
+gulp.task('test-server', function() {
+    return gulp.src(server + 'tests/**/*.spec.js', {read: false})
+        .pipe(plugins.mocha({
+            reporter: 'spec'
+        }));
+});
+
 gulp.task('clean', function(cb) {
     del([dist], cb);
 });
 
-gulp.task('default', ['live-server', 'build', 'serve', 'watch']);
+gulp.task('default', ['build', 'serve', 'watch']);
 
-gulp.task('build', ['clean', 'html', 'scripts', 'styles']);
+gulp.task('build', ['clean', 'scripts']);
 
 gulp.task('test', ['test-client']);

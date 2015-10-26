@@ -1,6 +1,10 @@
+/*jslint node: true */
+'use strict';
+
 function publicationItem(app) {
 
     var PublicationItem = {
+        name: 'PublicationItem',
         getAll: getAll
     };
 

@@ -1,8 +1,10 @@
 # React-Me
 
-This react app is a proof of concept of several technologies.
+[![Build Status][travis-image]][travis-url]
 
-[DEMO](https://sheltered-forest-1877.herokuapp.com)
+**This react app is a proof of concept of several technologies.**
+
+[**DEMO**](https://sheltered-forest-1877.herokuapp.com)
 
 ## Installation
 

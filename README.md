@@ -1,6 +1,6 @@
 # React-Me
 
-[![Build Status][travis-image]][travis-url]
+[![Build Status](https://travis-ci.org/cwilgenhoff/react-me.svg?branch=master)](https://travis-ci.org/cwilgenhoff/react-me)
 
 **This react app is a proof of concept of several technologies.**
 

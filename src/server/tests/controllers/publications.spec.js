@@ -15,10 +15,12 @@ mockApp.globals.models.PublicationItem = require(path.join(__dirname, serverPath
 var sinonSandBox;
 var publicationsController;
 var registerEndpointStub;
+var publicationMock;
 
 describe('Publications Controller', function () {
 
     beforeEach(function() {
+        publicationMock = {title: 'title', summary: 'summary', cover: {url: 'url'}};
         sinonSandBox = sinon.sandbox.create();
         registerEndpointStub = sinonSandBox.stub(mockApp, 'registerEndpoint');
         publicationsController = require(path.join(__dirname, serverPath, 'controllers/publications'))(mockApp);
@@ -64,8 +66,8 @@ describe('Publications Controller', function () {
                 publications[0].should.have.property('cover').with.property('url').with.equal('url');
             }
         };
-        var publication = {title: 'title', summary: 'summary', cover: {url: 'url'}};
-        publicationItemModelGetAllStub.callsArgWith(0, null, [publication]);
+
+        publicationItemModelGetAllStub.callsArgWith(0, null, [publicationMock]);
         //act
         publicationsController.getPublications(req, res);
     });
@@ -81,8 +83,23 @@ describe('Publications Controller', function () {
                 publications.should.have.length(2);
             }
         };
-        var publication = {title: 'title', summary: 'summary', cover: {url: 'url'}};
-        publicationItemModelGetAllStub.callsArgWith(0, null, [publication, publication]);
+        publicationItemModelGetAllStub.callsArgWith(0, null, [publicationMock, publicationMock]);
+        //act
+        publicationsController.getPublications(req, res);
+    });
+
+    it('should get three publication items', function() {
+        //prepare
+        var publicationItemModelGetAllStub = sinonSandBox.stub(mockApp.globals.models.PublicationItem, 'getAll');
+        var req = {};
+        var res = {
+            send: function(publications) {
+                //assert
+                publicationItemModelGetAllStub.calledOnce.should.equal(true);
+                publications.should.have.length(3);
+            }
+        };
+        publicationItemModelGetAllStub.callsArgWith(0, null, [publicationMock, publicationMock, publicationMock]);
         //act
         publicationsController.getPublications(req, res);
     });

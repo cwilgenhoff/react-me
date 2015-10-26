@@ -28,6 +28,7 @@
   "homepage": "https://github.com/cwilgenhoff/react-me#readme",
   "devDependencies": {
     "babel": "^5.8.29",
+    "babel-plugin-rewire": "^0.1.22",
     "browser-sync": "^2.9.11",
     "chai": "^3.4.0",
     "gulp-live-server": "0.0.29",
@@ -37,6 +38,8 @@
     "mocha": "^2.3.3",
     "object-assign": "^2.0.0",
     "react-tools": "^0.13.1",
+    "rewire": "^2.3.4",
+    "rewire-webpack": "^1.0.0",
     "sinon": "^1.17.2"
   },
   "dependencies": {

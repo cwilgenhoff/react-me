@@ -12,14 +12,13 @@ function config() {
             dbName: 'test-collection-prod',
             remote: {
                 dbName: 'test-collection',
-                protocol: 'http',
-                url: 'padify.cloudant.com',
-                username: 'asemeacherbsepteditheres',
-                password: '81f0885385265026485780696c1f95f9eb529833'
+                protocol: 'https',
+                url: 'wiljs.cloudant.com',
+                username: 'iaticaskedntlenitimanden',
+                password: 'b538fcb2bab5d891a35129eb26196094169564ce'
             },
             options: {
-                /* CORS is disabled in remote CouchDB */
-                /* live: true  */
+                live: true
             }
         }
     };

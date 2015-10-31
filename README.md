@@ -6,6 +6,8 @@
 
 [**DEMO**](https://sheltered-forest-1877.herokuapp.com)
 
+[**SLIDES**](slides/React-me.wiljs.pdf)
+
 ## Installation
 
 Install all dependencies.
